@@ -1,0 +1,39 @@
+(******************************************************************)
+(*     Restriction file for 2HDMbeta.fr                           *)
+(*                                                                *)                                           
+(*     The yukawa matrices are related to masses                  *)
+(*     Flavor symmetries and CP symmetries are assumed            *)
+(******************************************************************)
+	
+M$Restrictions = {           
+	            GLR[1, 1] :> ME Sqrt[2]*TB,
+	            GLI[1,1] :> 0,           
+	            GLR[2, 2] :> MM Sqrt[2]* TB,
+	            GLI[2,2] :> 0,           
+	            GLR[3, 3] :> ML Sqrt[2]* TB,
+	            GLI[3,3] :> 0,           
+	            GDR[1, 1] :> MD Sqrt[2]* TB,
+	            GDI[1,1] :> 0,           
+	            GDR[2, 2] :> MS Sqrt[2]* TB,
+	            GDI[2,2] :> 0,           
+	            GDR[3, 3] :> MB Sqrt[2]* TB,
+	            GDI[3,3] :> 0,           
+	            GUR[1, 1] :> -MU Sqrt[2]/TB,
+	            GUI[1,1] :> 0,           
+	            GUR[2, 2] :> -MC Sqrt[2]/TB,
+	            GUI[2,2] :> 0,           
+	            GUR[3, 3] :> -MT Sqrt[2]/TB,
+	            GUI[3,3] :> 0,
+	         
+	            GL[1, 1] :> ME Sqrt[2]* TB,
+	            GL[2, 2] :> MM Sqrt[2]* TB,
+	            GL[3, 3] :> ML Sqrt[2]* TB,
+	            GD[1, 1] :> MD Sqrt[2]* TB,
+	            GD[2, 2] :> MS Sqrt[2]* TB,
+	            GD[3, 3] :> MB Sqrt[2]* TB,
+	            GU[1, 1] :> -MU Sqrt[2]/TB,
+	            GU[2, 2] :> -MC Sqrt[2]/TB,
+	            GU[3, 3] :> -MT Sqrt[2]/TB,
+	
+	            mixh :> Pi/2-ArcSin[SBA]
+}

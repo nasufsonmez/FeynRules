@@ -1,0 +1,208 @@
+(****************  Parameters *************)
+
+M$ParametersHiggsBasis = {
+	
+  l1 == {
+     ParameterType -> External,
+     ComplexParameter -> False,
+     TeX -> Subscript[\[Lambda], 1],
+     Value -> 1.02836,
+     InteractionOrder -> {QED,2},
+     ParameterName -> l1
+     },
+
+l2 == {
+     ParameterType -> External,
+     ComplexParameter -> False,
+     TeX -> Subscript[\[Lambda], 2],
+     Value -> 27.66600,
+     InteractionOrder -> {QED,2},
+     ParameterName -> l2
+     },
+
+l3 == {
+     ParameterType -> External,
+     ComplexParameter -> False,
+     TeX -> Subscript[\[Lambda], 3],
+     Value -> 31.52270,
+     InteractionOrder -> {QED,2},
+     ParameterName -> l3
+     },
+
+  l4 == {
+     ParameterType -> External,
+     ComplexParameter -> False,
+     TeX -> Subscript[\[Lambda], 4],
+     Value ->  -1.99998,
+     InteractionOrder -> {QED,2},
+     ParameterName -> l4},
+     
+
+   l5 == {
+     ParameterType -> External,
+     ComplexParameter -> True,
+     BlockName -> Higgs,
+     TeX -> Subscript[\[Lambda], 5],
+     Value -> -1.99998,
+     InteractionOrder -> {QED,2},
+     ParameterName -> l5},
+
+  l6 == {
+     ParameterType -> External,
+     ComplexParameter -> True,
+     TeX -> Subscript[\[Lambda], 6],
+     Value -> -1.33475 ,
+     InteractionOrder -> {QED,2},
+     ParameterName -> l6},
+     
+  l7 == {
+     ParameterType -> External,
+     ComplexParameter -> False,
+     TeX -> Subscript[\[Lambda], 7],
+     Value ->0.0000000,
+     InteractionOrder -> {QED,2},
+     ParameterName -> l7},
+     
+     
+   mhc == {
+        ParameterType -> External,
+        Value -> 526.33676,
+        ComplexParameter->False,
+        Description -> "mhc mass term"},
+        
+   mu1 == {
+        ParameterType -> Internal,
+        ComplexParameter -> False,
+        Value -> -l1/2*vev^2,
+        Description -> "Phi1 mass term"},
+
+   mu2 == {
+        ParameterType -> Internal,
+        ComplexParameter -> False,
+        Value -> mhc^2-l3*vev^2/2,
+        Description -> "Phi2 mass term"},
+  
+   mu3 == {
+        ParameterType -> External,
+        Value -> l6*vev^2/2,
+        ComplexParameter->False,
+        Description -> "Phi1 Phi2 mass term"}
+    
+
+}
+
+
+(* *********************************** *)
+(*                                     *)
+(* *****         Higgses         ***** *)
+(*                                     *)
+(* *********************************** *)
+
+
+M$HiggsFields = {
+(* Higgs: unphysical scalars  *)
+
+  S[11] == { 
+    ClassName      -> Phi1, 
+    Unphysical     -> True, 
+    Indices        -> {Index[SU2D]},
+    FlavorIndex    -> SU2D,
+    SelfConjugate  -> False,
+    QuantumNumbers -> {Y -> 1/2 },
+    Definitions    -> {	Phi1[1] ->  GP, 
+						Phi1[2] -> (vev + Nh[1] + I*G0)/Sqrt[2] }
+	},
+  
+  S[12] == { 
+    ClassName      -> Phi2, 
+    Unphysical     -> True, 
+    Indices        -> {Index[SU2D]},
+    FlavorIndex    -> SU2D,
+    SelfConjugate  -> False,
+    QuantumNumbers -> {Y -> 1/2},
+    Definitions    -> { Phi2[1] -> Hc, 
+    					Phi2[2] ->(Nh[2]+I*Nh[3])/Sqrt[2] } 
+	},
+
+	
+(* Higgs: goldstone boson  *)
+
+  S[21] == {
+    ClassName       -> G0,
+    SelfConjugate   -> True,
+    Goldstone       -> Z,
+    Mass            -> {MZ, 91.1876},
+    Width           -> {WZ, 2.4952},
+    PropagatorLabel -> "Go",
+    PropagatorType  -> D,
+    PropagatorArrow -> None,
+    PDG             -> 250,
+    ParticleName    -> "G0",
+    FullName        -> "G0"
+  },
+  
+  S[22] == {
+    ClassName        -> GP,
+    SelfConjugate    -> False,
+    Goldstone        -> W,
+    Mass             -> {MW, Internal},
+    QuantumNumbers   -> {Q -> 1},
+    Width            -> {WW, 2.085},
+    PropagatorLabel  -> "GP",
+    PropagatorType   -> D,
+    PropagatorArrow  -> None,
+    PDG              -> 251,
+    ParticleName     -> "G+",
+    AntiParticleName -> "G-",
+    FullName         -> "GP"
+  },
+
+(* Higgs : neutral unphysical states*)
+  S[31] == {
+    ClassName     -> Nh,
+    SelfConjugate -> True,
+    Indices       -> {Index[Higgs]},
+    FlavorIndex   -> Higgs,
+    Mass -> 0,
+    ClassMembers  -> {Nh1, Nh2, Nh3},
+    Unphysical    -> True,
+    Definitions   -> {Nh[i_] :> Module[{j}, TH[i,j] H[j]]}
+    },
+
+(* Higgs : physical states*)  
+  S[1] == {
+    ClassName      -> Hc,
+    SelfConjugate  -> False,
+    Indices        -> {},
+    QuantumNumbers -> {Q -> 1},
+    Mass           -> {MHp, 526.33676},
+    Width          -> {whc, 1},
+    ParticleName   -> "h+",
+    AntiParticleName -> "h-",
+    PDG -> 37,
+    PropagatorType  -> ScalarDash,
+    PropagatorArrow -> Forward,
+    PropgatorLabel  -> "hc"
+    },
+    
+  S[2] == {
+    ClassName     -> H,
+    SelfConjugate -> True,
+    Indices       -> {Index[Higgs]},
+    FlavorIndex -> Higgs,
+    ClassMembers  -> {h1, h2, h3},
+    Mass -> {MH, {Mh0, 125}, {MHH, 450}, {MA0, 526.33676}},
+    Width -> {WH, {Wh1, 1}, {Wh2, 1}, {Wh3, 1}},
+    PDG -> {25,35,36},
+    PropagatorType -> ScalarDash,
+    PropagatorArrow -> None,
+    PropgatorLabel  -> {"h1", "h2", "h3"}
+    }
+
+};
+
+
+
+
+
+

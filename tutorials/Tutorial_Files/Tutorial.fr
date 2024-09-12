@@ -1,0 +1,175 @@
+(**************************************************************************)
+(*                                                                        *)
+(*                    Model file for the tutorial in TASI 2013            *)
+(*  This model is based on the MC4BSM tutorial, 1209.0297                 *)
+(*                                                                        *)
+(**************************************************************************)
+
+M$ModelName = "Tutorial";
+
+M$Information = {Authors -> {"C. Duhr"}, 
+             Version -> "1.0",
+             Date -> "27. 02. 2012",
+             Institutions -> {"ETH Zurich"},
+             Emails -> {"duhrc@itp.phys.ethz.ch"}
+             };
+
+M$InteractionOrderHierarchy = {
+  {NP, 2}
+};
+
+
+
+(*****************************************************************************)
+(*              New Parameters                                               *)
+(*****************************************************************************)
+
+M$Parameters = {
+
+    (* Mass parameters for the scalar fields *)
+
+    MM1 == {
+           ParameterType -> External,
+           Value         -> 1
+         },
+
+    MM2 == {
+           ParameterType -> External,
+           Value         -> 100
+         },
+
+    MM12 == {
+           ParameterType -> External,
+           Value         -> 0.5
+         },
+
+    MPe1 == {
+           ParameterType -> Internal,
+           Value         -> Sqrt[(MM1^2 + MM2^2 - Sqrt[MM1^4 + 4*MM12^4 - 2*MM1^2*MM2^2 + MM2^4])/2]
+          },
+
+    MPe2 == {
+           ParameterType -> Internal,
+           Value         -> Sqrt[(MM1^2 + MM2^2 + Sqrt[MM1^4 + 4*MM12^4 - 2*MM1^2*MM2^2 + MM2^4])/2]
+          },
+
+
+    (* Mixing angle *)
+    th == {
+          ParameterType -> Internal,
+          Value         -> ArcTan[2 MM12^2/(MM1^2 - MM2^2)]/2 + Pi/2
+         },
+
+
+    (* Yukawa couplings *)
+
+    lam1 == {
+          ParameterType    -> External,
+          Indices       -> {Index[Generation]},
+          Value            -> {lam1[1]->0.1,lam1[2]->0.1,lam1[3]->0.1},
+          InteractionOrder -> {NP, 1},
+          ComplexParameter -> False
+         },
+
+    lam2 == {
+          ParameterType    -> External,
+          Indices       -> {Index[Generation]},
+          Value            -> {lam2[1]->0.1,lam2[2]->0.1,lam2[3]->0.1},
+          InteractionOrder -> {NP, 1},
+          ComplexParameter -> False
+         },
+
+    lam1p == {
+          ParameterType    -> External,
+          Indices       -> {Index[Generation]},
+          Value            -> {lam1p[1]->0.1,lam1p[2]->0.1,lam1p[3]->0.1},
+          InteractionOrder -> {NP, 1},
+          ComplexParameter -> False
+         },
+
+    lam2p == {
+          ParameterType    -> External,
+          Indices       -> {Index[Generation]},
+          Value            -> {lam2p[1]->0.1,lam2p[2]->0.1,lam2p[3]->0.1},
+          InteractionOrder -> {NP, 1},
+          ComplexParameter -> False
+         }
+
+};
+
+
+
+
+(*****************************************************************************)
+(*              New fields                                                   *)
+(*****************************************************************************)
+
+
+M$ClassesDescription = {
+
+    S[100] == {
+          ClassName     -> pi1,
+          SelfConjugate -> True,
+          Indices       -> {},
+          Unphysical    -> True,
+          Definitions   -> {pi1  ->  - Sin[th] p1 + Cos[th] p2}
+         },
+
+    S[101] == {
+          ClassName     -> pi2,
+          SelfConjugate -> True,
+          Indices       -> {},
+          Unphysical    -> True,
+          Definitions   -> {pi2  ->  Cos[th] p1 + Sin[th] p2}
+         },
+
+     S[102] == {
+          ClassName     -> p1,
+          SelfConjugate -> True,
+          Indices       -> {},
+          Mass          -> {MPe1, Internal},
+          Width         -> {Wpe1, 1}
+         },
+
+     S[103] == {
+          ClassName     -> p2,
+          SelfConjugate -> True,
+          Indices       -> {},
+          Mass          -> {MPe2, Internal},
+          Width         -> {Wpe2, 1}
+         },
+
+
+      F[100] == {
+          ClassName      -> uv,
+          SelfConjugate  -> False,
+          Indices        -> {Index[Colour]},
+          QuantumNumbers -> {Y -> 2/3, Q -> 2/3},
+          Mass           -> {Muv, 400},
+          Width          -> {Wuv,1}
+         },
+
+      F[101] == {
+          ClassName      -> ev,
+          SelfConjugate  -> False,
+          Indices        -> {},
+          QuantumNumbers -> {Y -> -1, Q -> -1},
+          Mass           -> {Mev, 50},
+          Width          -> {Wev,1}
+         }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
