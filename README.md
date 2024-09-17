@@ -20,8 +20,11 @@ The necessary files for the calculation such as the Lagrangian, the basis the mo
 **How to run**
 
 $FeynRulesPath = SetDirectory["/Users/nsonmez/Downloads/feynrules-current"];
+
 <<FeynRules`
+
 SetDirectory["./2HDM"];
+
 
 There are some Mathematica® Notebooks that you can use to make the first calculations.
 Each corresponds to various parameters.
