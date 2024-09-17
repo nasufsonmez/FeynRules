@@ -15,4 +15,24 @@ Software and Tools:
 **FeynRules Integration**: The notebook integrates seamlessly with FeynRules, using it to derive the Feynman rules for both tree and loop levels.
 
 
+The necessary files for the calculation such as the Lagrangian, the basis the model is defined and relevant definitions are defined in "**"2HDM**" folder."
+
+**How to run**
+
+$FeynRulesPath = SetDirectory["/Users/nsonmez/Downloads/feynrules-current"];
+<<FeynRules`
+SetDirectory["./2HDM"];
+
+There are some Mathematica® Notebooks that you can use to make the first calculations.
+Each corresponds to various parameters.
+
+2HDM.nb
+2HDM_feynrules.nb
+THDM.nb
+THDMv2.nb
+FeynRules.pars
+HillModel.nb
+SM.nb
+
+
 
