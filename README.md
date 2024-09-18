@@ -19,23 +19,27 @@ The necessary files for the calculation such as the Lagrangian, the basis the mo
 
 **How to run**
 
+```Mathematica
 $FeynRulesPath = SetDirectory["/Users/nsonmez/Downloads/feynrules-current"];
+```
 
+```Mathematica
 <<FeynRules`
+```
 
+```Mathematica
 SetDirectory["./2HDM"];
-
+```
 
 There are some Mathematica® Notebooks that you can use to make the first calculations.
 Each corresponds to various parameters.
 
-2HDM.nb
-2HDM_feynrules.nb
-THDM.nb
-THDMv2.nb
-FeynRules.pars
-HillModel.nb
-SM.nb
+1. **2HDM.nb**
+2. **2HDM_feynrules.nb**
+3. **THDM.nb**
+4. **THDMv2.nb**
+5. **HillModel.nb**
+6. **SM.nb**
 
 
 
