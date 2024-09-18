@@ -6,8 +6,10 @@ This notebook utilizes **Mathematica** in combination with the **FeynRules** pac
 
 **Prerequisites**
 
-Software and Tools:
+**Software and Tools**:
+
 **Mathematica**: Ensure that Mathematica is installed on your system.
+
 **FeynRules**: A Mathematica package used for deriving Feynman rules in quantum field theories. FeynRules can be downloaded from FeynRules website.
 
 **Automatic Vertex Calculation**: The notebook automates the calculation of Feynman vertices, including one-loop corrections.
